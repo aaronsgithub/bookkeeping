@@ -14,6 +14,9 @@ import os
 import environ
 
 
+# initialise environ
+env = environ.Env()
+
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('apps')
 
@@ -31,9 +34,9 @@ SECRET_KEY = 'x8ehqvgpwg!ugpwt&b8^6pdut2s58_r^y8cj6!#2*)5hrqrez&'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-        "192.168.0.100",
-        "three.local",        
-        ]
+    "192.168.0.100",
+    "three.local",        
+]
 
 
 # App Configuration
@@ -94,10 +97,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db('SQLITE_URL',default='sqlite:///db.sqlite3')
 }
 
 
